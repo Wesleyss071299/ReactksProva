@@ -12,8 +12,27 @@ code {
     monospace;
 }
 
+li {
+  display: inline;
+}
+
+header {
+	border-bottom: 2px solid #ebebeb;
+}
+
+button {
+	border: none;
+}
+
 body {
   background-color: #f7f7f7;
   margin: 0;
 	font-family: 'Roboto';
+}
+
+.title {
+  font-size: 1.5em;
+	font-weight: 700;
+	font-style: italic;
+  color: #707070;
 }
