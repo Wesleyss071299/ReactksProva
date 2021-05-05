@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import {fetchGameData} from '../../store/game-actions';
 import {BetContainer, GameContainer, GameInfoContainer, ButtonsGameContainer} from './styles'
 
 interface Types {
@@ -19,21 +22,11 @@ interface ResponseData {
 
 
 const NewGame = () => {
-
-    const [games, setGames] = useState<ResponseData>({} as ResponseData);
+    const dispatch = useAppDispatch()
+    const games = useAppSelector((state) => state.game.games)
     useEffect(() => {
-        const getData = async() => {
-            const response = await fetch('games.json',{
-                headers : { 
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                 }
-              })
-            const gamesResponse = await response.json();
-            setGames(gamesResponse);
-        }
-
-        getData()
+        dispatch(fetchGameData())
+        console.log(games)
     }, [])
     return(      
         <BetContainer>
@@ -42,7 +35,7 @@ const NewGame = () => {
                 <GameInfoContainer>
                     <h3>Choose Game</h3>
                     <ButtonsGameContainer>  
-                        <button>{games.types[1].type}</button>
+                        <button onClick={() => console.log(games)}></button>
                     </ButtonsGameContainer>
                 </GameInfoContainer>
             </GameContainer>
