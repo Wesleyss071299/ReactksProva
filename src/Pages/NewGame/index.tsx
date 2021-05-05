@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React,  { MouseEvent, useEffect, useState} from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import {fetchGameData} from '../../store/game-actions';
-import {BetContainer, GameContainer, GameInfoContainer, ButtonsGameContainer} from './styles'
+import {BetContainer, GameContainer, GameInfoContainer, ButtonsGameContainer, ButtonGame} from './styles'
 
-interface Types {
+type Types  = {
     type: string;
     description: string;
     range: number;
@@ -14,29 +14,46 @@ interface Types {
     'min-cart-value': number;
 }
 
-interface ResponseData {
-    types: Types[];
-
+interface IProps{
+    color?: string
 }
 
 
-
-const NewGame = () => {
+const NewGame: React.FC<IProps> = () => {
     const dispatch = useAppDispatch()
-    const games = useAppSelector((state) => state.game.games)
+    
+    const games = useAppSelector((state)=> state.game.games)
+    
+    const [currentGame, setCurrentGame] = useState<Types>({} as Types)
+
     useEffect(() => {
         dispatch(fetchGameData())
-        console.log(games)
-    }, [])
+    }, [dispatch])
+
+    useEffect(() => {
+        setCurrentGame(games[0])
+    }, [games])
+
+    const setGameType = (event: MouseEvent<HTMLElement>) => {
+        const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
+        setCurrentGame(game)
+    }
+
     return(      
         <BetContainer>
             <GameContainer>
-                <h2 className="title"> NEW BET <strong>FOR</strong> <strong> mega-sena</strong></h2>
+                <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame?.type}</strong></h2>
                 <GameInfoContainer>
                     <h3>Choose Game</h3>
                     <ButtonsGameContainer>  
-                        <button onClick={() => console.log(games)}></button>
+                        {games.map((item) => (
+                            <ButtonGame color={item.color} key={item.type} value={item.type} onClick={setGameType}>
+                                {item.type}
+                            </ButtonGame>
+                        ))}
                     </ButtonsGameContainer>
+                    <p>{currentGame?.description}</p>
+                    
                 </GameInfoContainer>
             </GameContainer>
             <GameContainer>

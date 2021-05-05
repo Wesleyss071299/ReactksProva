@@ -1,5 +1,4 @@
-import { Dispatch } from 'redux'
-import { AppDispatch } from '.'
+import { AppDispatch } from './index'
 import {gameActions} from './game-slice'
 
 export const fetchGameData = () => {
@@ -12,12 +11,12 @@ export const fetchGameData = () => {
                  }
               })
             const gamesResponse = await response.json();
-            return gamesResponse;
+            return gamesResponse.types;
         }
         try {
             const gameData = await fetchGame();
             dispatch(
-                gameActions.fetchGame(gameData)
+                gameActions.fetchGame({games: gameData})
             )
         } catch (error) {
             

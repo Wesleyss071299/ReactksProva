@@ -28,11 +28,12 @@ export const GameInfoContainer = styled.div`
 
 export const ButtonsGameContainer = styled.div`
     flex-direction: row;
-    button {
+`;
+export const ButtonGame = styled.button<{color?: string}>`
         width: 113px;
         height: 34px;
         border-radius: 100px 100px 100px 100px;
-        border: yellowgreen 2px solid;
+        border: ${props => props.color} 2px solid;
         min-width: 103px;
         background: none;
         margin: 20px 25px 20px 0;
@@ -40,5 +41,4 @@ export const ButtonsGameContainer = styled.div`
         font-size: 0.875em;
         font-style: italic;
         font-weight: 700;
-    }
 `;
