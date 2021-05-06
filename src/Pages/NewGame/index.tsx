@@ -1,10 +1,13 @@
 import React,  { MouseEvent, useEffect, useState} from 'react';
-
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import {fetchGameData} from '../../store/game-actions';
 import {BetContainer, GameContainer, GameInfoContainer} from './styles'
-import ButtonsGameType from '../../components/ButtonsGameType';
 
+// Redux
+import {fetchGameData} from '../../store/game-actions';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+// Components
+import GameDescription from '../../components/GameDescription';
+import ButtonsGameType from '../../components/ButtonsGameType';
+// Interfaces
 import { Types } from '../../interfaces/game-interfaces'
 
 
@@ -37,7 +40,10 @@ const NewGame: React.FC = () => {
                 <GameInfoContainer>
                     <h3>Choose Game</h3>
                     <ButtonsGameType onSetGameType={setGameType}/>
-                    <p>{currentGame?.description}</p>                  
+                </GameInfoContainer>
+
+                <GameInfoContainer>
+                    <GameDescription description={currentGame?.description}/>               
                 </GameInfoContainer>
             </GameContainer>
         </BetContainer>

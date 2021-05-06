@@ -23,5 +23,4 @@ export const GameContainer = styled.section`
 
 export const GameInfoContainer = styled.div`
 	max-width: 750px;
-	padding: 0 10px;
 `;
