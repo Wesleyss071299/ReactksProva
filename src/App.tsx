@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Navbar />      
-      <NewGame />
+      <NewGame/>
     </div>
   );
 }

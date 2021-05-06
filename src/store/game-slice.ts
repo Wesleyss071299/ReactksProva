@@ -1,16 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {RootState} from './index'
-
-type Types = {
-    type: string;
-    description: string;
-    range: number;
-    price: number;
-    'max-number': number;
-    color: string;
-    'min-cart-value': number;
-}
-
+import { Types } from '../interfaces/game-interfaces'
 
 const initialState = {
     games : [] as Types[]
