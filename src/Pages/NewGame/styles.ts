@@ -22,5 +22,5 @@ export const GameContainer = styled.section`
 `;
 
 export const GameInfoContainer = styled.div`
-	max-width: 750px;
+	max-width: 650px;
 `;

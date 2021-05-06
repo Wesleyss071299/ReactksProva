@@ -9,6 +9,7 @@ import GameDescription from '../../components/GameDescription';
 import ButtonsGameType from '../../components/ButtonsGameType';
 // Interfaces
 import { Types } from '../../interfaces/game-interfaces'
+import NumberButton from '../../components/NumberButton';
 
 
 
@@ -39,12 +40,13 @@ const NewGame: React.FC = () => {
                 <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame?.type}</strong></h2>
                 <GameInfoContainer>
                     <h3>Choose Game</h3>
-                    <ButtonsGameType onSetGameType={setGameType}/>
+                    <ButtonsGameType onSetGameType={setGameType} currentType={currentGame?.type}/>
                 </GameInfoContainer>
 
                 <GameInfoContainer>
                     <GameDescription description={currentGame?.description}/>               
                 </GameInfoContainer>
+                <NumberButton range={currentGame?.range}/>
             </GameContainer>
         </BetContainer>
     )

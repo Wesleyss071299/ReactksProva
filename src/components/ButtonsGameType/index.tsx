@@ -1,18 +1,33 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, useEffect } from 'react'
 import { useAppSelector } from '../../store/hooks'
 import {ButtonsGameContainer, ButtonGame} from './styles'
 
-const ButtonsGameType: React.FC<{onSetGameType: (event: MouseEvent<HTMLElement>) => void}> = (props) => { 
-   
+const ButtonsGameType: React.FC<{onSetGameType: (event: MouseEvent<HTMLElement>) => void, currentType: string}> = (props) => { 
+ 
     const games = useAppSelector((state)=> state.game.games)
+
    
     return(
         <ButtonsGameContainer>  
-            {games.map((item) => (
-                <ButtonGame color={item.color} key={item.type} value={item.type} onClick={props.onSetGameType}>
-                    {item.type}
-                </ButtonGame>
-            ))}
+            {games.map((item) => {
+                if(props.currentType === item.type) {
+                    return(
+                    <ButtonGame color={item.color} key={item.type} value={item.type} onClick={(e: MouseEvent<HTMLElement>) => {
+                        props.onSetGameType(e)
+                    }}>
+                        {item.type}
+                    </ButtonGame>
+                    )
+                }else {
+                    return (
+                        <ButtonGame border={item.color} key={item.type} value={item.type} onClick={(e: MouseEvent<HTMLElement>) => {
+                            props.onSetGameType(e)
+                        }}>
+                            {item.type}
+                        </ButtonGame>
+                    )
+                }
+            })}
         </ButtonsGameContainer>
     )
 }
