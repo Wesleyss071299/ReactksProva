@@ -7,7 +7,7 @@ const NumberButton: React.FC<{range: number}> = (props) => {
     }
     return(
         <ChooseNumber>
-            {numbers.map((item) => <div>{+item + 1}</div>)}
+            {numbers.map((item) => <div key={item}>{+item + 1}</div>)}
         </ChooseNumber>
     )
 }  

@@ -3,7 +3,8 @@ import {RootState} from './index'
 import { Types } from '../interfaces/game-interfaces'
 
 const initialState = {
-    games : [] as Types[]
+    games : [] as Types[],
+    currentGame: {} as Types
 }
 
 const gameSlice = createSlice({
@@ -11,8 +12,13 @@ const gameSlice = createSlice({
     initialState,
     reducers: {
         fetchGame(state, action) {
-            state.games = action.payload.games
-           
+            state.games = action.payload.games     
+        },
+        loadCurrentGame(state) {
+            state.currentGame = state.games[0]
+        },
+        setGameType(state, action) {
+            state.currentGame = action.payload.currentGame
         }
     }
 })

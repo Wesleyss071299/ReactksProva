@@ -1,8 +1,8 @@
-import React,  { MouseEvent, useEffect, useState} from 'react';
+import React,  { MouseEvent, useEffect } from 'react';
 import {BetContainer, GameContainer, GameInfoContainer} from './styles'
 
 // Redux
-import {fetchGameData} from '../../store/game-actions';
+import { fetchGameData, setCurentGameData } from '../../store/game-actions';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 // Components
 import GameDescription from '../../components/GameDescription';
@@ -18,35 +18,32 @@ const NewGame: React.FC = () => {
     const dispatch = useAppDispatch()
     
     const games = useAppSelector((state)=> state.game.games)
-    
-    const [currentGame, setCurrentGame] = useState<Types>({} as Types)
+    const currentGame = useAppSelector((state)=> state.game.currentGame)
+
 
     useEffect(() => {
-        dispatch(fetchGameData())
+        dispatch(fetchGameData())        
     }, [dispatch])
 
-    useEffect(() => {
-        setCurrentGame(games[0])
-    }, [games])
 
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
-        setCurrentGame(game)
+        dispatch(setCurentGameData(game))
     }
 
     return(      
         <BetContainer>
             <GameContainer>
-                <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame?.type}</strong></h2>
+                <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame.type}</strong></h2>
                 <GameInfoContainer>
                     <h3>Choose Game</h3>
-                    <ButtonsGameType onSetGameType={setGameType} currentType={currentGame?.type}/>
+                    <ButtonsGameType onSetGameType={setGameType} />
                 </GameInfoContainer>
 
                 <GameInfoContainer>
-                    <GameDescription description={currentGame?.description}/>               
+                    <GameDescription description={currentGame.description}/>               
                 </GameInfoContainer>
-                <NumberButton range={currentGame?.range}/>
+                <NumberButton range={currentGame.range}/>
             </GameContainer>
         </BetContainer>
     )

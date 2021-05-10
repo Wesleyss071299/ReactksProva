@@ -1,5 +1,6 @@
 import { AppDispatch } from './index'
 import {gameActions} from './game-slice'
+import { Types } from '../interfaces/game-interfaces'
 
 export const fetchGameData = () => {
     return async(dispatch: AppDispatch) => {
@@ -18,9 +19,17 @@ export const fetchGameData = () => {
             dispatch(
                 gameActions.fetchGame({games: gameData})
             )
+            dispatch(
+                gameActions.loadCurrentGame()
+            )
         } catch (error) {
             
         }
     }
 
+}
+export const setCurentGameData = (currentGame: Types) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(gameActions.setGameType({currentGame}))
+    }
 }

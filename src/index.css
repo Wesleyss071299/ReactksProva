@@ -17,6 +17,10 @@ li {
   display: inline;
 }
 
+strong {
+  text-transform: uppercase;
+}
+
 header {
 	border-bottom: 2px solid #ebebeb;
 }
