@@ -1,8 +1,10 @@
+import React from 'react'
+
 import {ActionButtonContainer} from './styles';
-const ActionButton = () => {
+const ActionButton:React.FC<{title: string, onClick: () => void}> = (props) => {
     return(
-        <ActionButtonContainer>
-            Clear Game
+        <ActionButtonContainer onClick={props.onClick}>
+            {props.title}
         </ActionButtonContainer>
     )
 }
