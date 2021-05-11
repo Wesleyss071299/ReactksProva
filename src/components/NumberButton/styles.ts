@@ -6,11 +6,11 @@ export const ChooseNumber = styled.section`
    
 `;
 
-export const Number= styled.div<{color?:  string}>`
+export const Number = styled.div<{background?:  string}>`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: ${props => props.color ? props.color : '#adc0c4'};
+    background: ${props => props.background ? props.background : '#adc0c4'};
     margin: 20px 13px 20px 0px;
     width: 65px;
     height: 65px;
@@ -18,5 +18,5 @@ export const Number= styled.div<{color?:  string}>`
     font-size: 1.25em;
     font-weight: 700;
     cursor: pointer;
-    color: '#fff'
+    color: white;
 `
