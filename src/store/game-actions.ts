@@ -33,3 +33,15 @@ export const setCurentGameData = (currentGame: Types) => {
         dispatch(gameActions.setGameType({currentGame}))
     }
 }
+
+export const setSelectedBetNumbers = (number: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(gameActions.addBetNumbers({selectedNumber: number}))
+    }
+
+}
+export const setCleanBetNumbers = () => {
+    return (dispatch: AppDispatch) => {
+        dispatch(gameActions.cleanBetNumbers())
+    }
+}

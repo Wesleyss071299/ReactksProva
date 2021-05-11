@@ -4,7 +4,8 @@ import { Types } from '../interfaces/game-interfaces'
 
 const initialState = {
     games : [] as Types[],
-    currentGame: {} as Types
+    currentGame: {} as Types,
+    selectedBetNumbers: [] as number[],  
 }
 
 const gameSlice = createSlice({
@@ -19,7 +20,18 @@ const gameSlice = createSlice({
         },
         setGameType(state, action) {
             state.currentGame = action.payload.currentGame
+        },
+        addBetNumbers(state, action) {
+            if(state.selectedBetNumbers.includes(action.payload.selectedNumber)){
+                state.selectedBetNumbers = state.selectedBetNumbers.filter((item) => item !== action.payload.selectedNumber)
+                return
+            }
+            state.selectedBetNumbers.push(action.payload.selectedNumber)
+        },
+        cleanBetNumbers(state) {
+            state.selectedBetNumbers = [] 
         }
+      
     }
 })
 

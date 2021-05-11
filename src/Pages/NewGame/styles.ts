@@ -5,7 +5,7 @@ export const BetContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: baseline;
-	margin: 75px auto;
+	margin: 60px auto;
 	max-width: 1440px;
     
     section{

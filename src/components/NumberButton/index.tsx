@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../store/hooks'
+import React, { useEffect } from 'react'
 import { ChooseNumber, Number } from './styles';
-const NumberButton: React.FC<{range: number}> = (props) => {
 
+import { setSelectedBetNumbers, setCleanBetNumbers } from '../../store/game-actions';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+
+const NumberButton: React.FC<{range: number}> = (props) => {
+    const dispatch = useAppDispatch()
     const currentGame = useAppSelector((state)=> state.game.currentGame)
+    const betNumbers = useAppSelector((state)=> state.game.selectedBetNumbers)
 
     let numbers = []
+    
     for (let i = 0; i < props.range; i++) {
         numbers.push(i)
     }
     
-    const [selectedNumbers, setSelectedNumbers ] = useState<number[]>([]);
-
     const handleClick = (index: number) => {
-        if (selectedNumbers.includes(index + 1)) {
-            setSelectedNumbers(prev => (
-                prev.filter((item) => item !== index + 1)
-            ))
-            return
-        }
-        setSelectedNumbers((prev) => [...prev, index + 1]);
+        dispatch(setSelectedBetNumbers(index + 1))
     }
+    
+    useEffect(() => {
+        dispatch(setCleanBetNumbers())
+    }, [currentGame, dispatch])
 
     useEffect(() => {
-        setSelectedNumbers([])
-    }, [currentGame])
-    
+        console.log(betNumbers)
+    }, [betNumbers])
     return(
         <ChooseNumber>
             {numbers.map((item, index) => 
                 <Number 
                     key={item} 
-                    background={selectedNumbers.includes(index + 1) ? '#27C383' : ''} 
+                    background={betNumbers.includes(index + 1) ? '#27C383' : ''} 
                     onClick={() => handleClick(index)}>{+item + 1}
                 </Number>
             )}
