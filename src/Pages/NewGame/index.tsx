@@ -1,8 +1,8 @@
 import React,  { MouseEvent, useEffect } from 'react';
-import {BetContainer, GameContainer, GameInfoContainer} from './styles'
+import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer} from './styles'
 
 // Redux
-import { fetchGameData, setCurentGameData, setCleanBetNumbers } from '../../store/game-actions';
+import { fetchGameData, setCurentGameData, setCleanBetNumbers, setGenerateBetNumbers } from '../../store/game-actions';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 // Components
 import GameDescription from '../../components/GameDescription';
@@ -45,8 +45,14 @@ const NewGame: React.FC = () => {
                     <GameDescription description={currentGame.description}/>               
                 </GameInfoContainer>
                 <NumberButton range={currentGame.range}/>
-                <ActionButton title="Complete Game" onClick={() => {}}/>
-                <ActionButton title="Clear Game" onClick={() => dispatch(setCleanBetNumbers())}/>
+
+                <GameActionsContainer>
+                    <div>
+                        <ActionButton title="Complete Game" onClick={() => dispatch(setGenerateBetNumbers())}/>
+                        <ActionButton title="Clear Game" onClick={() => dispatch(setCleanBetNumbers())}/>
+                    </div>
+                    <ActionButton title="Add to cart" onClick={() => {}} color="#27C383"/>
+                </GameActionsContainer>
             </GameContainer>
         </BetContainer>
     )

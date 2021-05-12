@@ -24,3 +24,10 @@ export const GameContainer = styled.section`
 export const GameInfoContainer = styled.div`
 	max-width: 650px;
 `;
+
+export const GameActionsContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-right: 50px;
+`;

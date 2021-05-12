@@ -45,3 +45,9 @@ export const setCleanBetNumbers = () => {
         dispatch(gameActions.cleanBetNumbers())
     }
 }
+
+export const setGenerateBetNumbers = () => {
+    return (dispatch: AppDispatch) => {
+        dispatch(gameActions.generateRandomNumbers())
+    }
+}

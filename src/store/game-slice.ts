@@ -30,6 +30,17 @@ const gameSlice = createSlice({
         },
         cleanBetNumbers(state) {
             state.selectedBetNumbers = [] 
+        },
+        generateRandomNumbers(state) {
+            const total = state.currentGame['max-number'] - state.selectedBetNumbers.length;
+            for (let i = 1; i <= total; i++){
+                let number = Math.ceil(Math.random() * state.currentGame.range)
+                if (state.selectedBetNumbers.some((item) => item === number)){
+                    i--;
+                } else {
+                    state.selectedBetNumbers.push(number)
+                }
+            }
         }
       
     }
