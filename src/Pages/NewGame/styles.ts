@@ -31,3 +31,9 @@ export const GameActionsContainer = styled.div`
 	flex-wrap: wrap;
 	margin-right: 50px;
 `;
+
+export const CartContainer = styled.div`
+	border: 1px solid #e2e2e2;
+	border-radius: 10px;
+	width: 420px;
+`;

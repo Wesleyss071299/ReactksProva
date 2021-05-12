@@ -1,5 +1,5 @@
 import React,  { MouseEvent, useEffect } from 'react';
-import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer} from './styles'
+import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer, CartContainer} from './styles'
 
 // Redux
 import { fetchGameData, setCurentGameData, setCleanBetNumbers, setGenerateBetNumbers } from '../../store/game-actions';
@@ -11,6 +11,7 @@ import ButtonsGameType from '../../components/ButtonsGameType';
 import { Types } from '../../interfaces/game-interfaces'
 import NumberButton from '../../components/NumberButton';
 import ActionButton from '../../components/ActionsButton';
+import Cart from '../../components/Cart';
 
 
 
@@ -54,6 +55,9 @@ const NewGame: React.FC = () => {
                     <ActionButton title="Add to cart" onClick={() => {}} color="#27C383"/>
                 </GameActionsContainer>
             </GameContainer>
+            <CartContainer>
+                <Cart/>
+            </CartContainer>
         </BetContainer>
     )
 }

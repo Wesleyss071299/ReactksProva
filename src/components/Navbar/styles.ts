@@ -42,6 +42,7 @@ export const LogoContainer = styled.div`
 export const NavLink = styled.a`
     display: inline-flex;
 	text-decoration: none;
+    font-weight: bold;
 	margin: 0 35px;
 	color: #707070;
     
