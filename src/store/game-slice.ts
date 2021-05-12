@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {RootState} from './index'
 import { Types } from '../interfaces/game-interfaces'
 
 const initialState = {
@@ -47,6 +46,6 @@ const gameSlice = createSlice({
 })
 
 export const gameActions = gameSlice.actions;
-export const selectGame = (state: RootState) => state.game.games
+
 
 export default gameSlice

@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import gameSlice from './game-slice';
+import cartSlice from './cart-slice';
 
 const store = configureStore({
-    reducer: {game : gameSlice.reducer}
+    reducer: {
+        game : gameSlice.reducer,
+        cart: cartSlice.reducer
+    }
 });
 
 export default store
