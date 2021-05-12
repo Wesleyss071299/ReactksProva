@@ -26,3 +26,36 @@ export const TotalCartNumber = styled.span`
     margin-left: 10px;
     font-weight: lighter;
 `;
+
+export const CartBody = styled.div`
+    max-height: 335px;
+	overflow: auto;
+	margin-bottom: 15px;
+`;
+
+export const CartFooter = styled.div`
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #F4F4F4;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	height: 96px;
+`;
+
+export const SaveButton = styled.button`
+    display: flex;
+	align-items: center;
+	font-size: 35px;
+	color: #27c383;
+    background: none;
+	padding: 17px 25px;
+	border-radius: 10px;
+	font-weight: 550;
+	cursor: pointer;
+	outline: none;
+`;
+
+export const IconSaveButton = styled.svg`
+    margin-left: 15px;
+`;
