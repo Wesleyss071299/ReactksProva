@@ -1,5 +1,12 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 li {
   display: inline;
+}
+
+html {
+  box-sizing: border-box;
 }
 
 strong {

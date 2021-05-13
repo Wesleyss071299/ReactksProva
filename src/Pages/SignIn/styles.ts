@@ -4,33 +4,34 @@ export const Container = styled.div`
     display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-
-`;
-
-export const LogoContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    div {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        width: 144px;
-        height: 39px;
-        border-radius: 100px;
-        background-color: #B5C401;
-        font-size:  22px;
-        color: #fff;
-        font-style: italic;
-        font-weight: bold;
+	margin-top: 150px;
+    h2 {
+        font-size: 35px;
+		text-align: center;
+		font-style: italic;
     }
-    h1 {
-        font-size: 83px;
+`;
+export const FormContainer = styled.div`
+	width: 352px;
+    h2 {
+        font-size: 35px;
+		text-align: center;
+		font-style: italic;
     }
 `;
 
-export const LogoText = styled.h1`
-   font-size: 65px;
-   text-align: center;
+export const Input = styled.input`
+	border-radius: 14pc; 
+	border: 0px solid; 
+	padding: 30px; 
+	width: 100%;
+	font-size: 17px;
+	color: #9D9D9D;
+	font-weight: bold;
+	font-style: italic;
+	:focus {
+		outline: none;
+	}
 `;
+
+
