@@ -6,10 +6,21 @@ import {CartInfo,
         CartFooter, 
         SaveButton, 
         IconSaveButton, 
-        CartBody
+        CartBody,
+        EmptyCart
 } from './styles';
 
+import { useAppSelector } from '../../store/hooks'
+
 const Cart: React.FC = () => {
+    const cartItems = useAppSelector((state) => state.cart)
+
+    if (cartItems.totalPrice === 0) {
+        return (
+            <EmptyCart>Carrinho Vazio!</EmptyCart>
+        )
+    }
+
     return(
         <div>
             <CartInfo>
@@ -17,14 +28,12 @@ const Cart: React.FC = () => {
             </CartInfo>
 
             <CartBody>
-                <CartItem/>
-                <CartItem/>
-                <CartItem/>
+                {cartItems.items.map((item) => <CartItem key={item.id} id={item.id} betNumbers={item.numbers} type={item.type} price={item.price} color={item.color}/>)}
             </CartBody>
 
             <TotalCart>
                 CART 
-                <TotalCartNumber>TOTAL: R$10,00</TotalCartNumber>
+                <TotalCartNumber>TOTAL: R$ {cartItems.totalPrice.toFixed(2).split('.').join(',')}</TotalCartNumber>
             </TotalCart>
             <CartFooter>
                 <SaveButton>

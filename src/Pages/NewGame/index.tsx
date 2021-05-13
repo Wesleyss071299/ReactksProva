@@ -3,6 +3,7 @@ import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer, Ca
 
 // Redux
 import { fetchGameData, setCurentGameData, setCleanBetNumbers, setGenerateBetNumbers } from '../../store/game-actions';
+import { AddCart } from '../../store/cart-actions';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 // Components
 import GameDescription from '../../components/GameDescription';
@@ -21,16 +22,38 @@ const NewGame: React.FC = () => {
     
     const games = useAppSelector((state)=> state.game.games)
     const currentGame = useAppSelector((state)=> state.game.currentGame)
+    const betNumbers = useAppSelector((state)=> state.game.selectedBetNumbers)
+    
 
 
     useEffect(() => {
         dispatch(fetchGameData())        
     }, [dispatch])
 
-
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
         dispatch(setCurentGameData(game))
+    }
+
+    const handleCleanGame = () => {
+        dispatch(setCleanBetNumbers())
+    }
+
+    const handleCompleteGame = () => {
+        dispatch(setGenerateBetNumbers())
+    }
+
+    const handleAddToCart = () => {
+        dispatch(
+            AddCart({
+                id: new Date().getMilliseconds(), 
+                numbers: betNumbers, 
+                price: currentGame.price, 
+                type: currentGame.type, 
+                color: currentGame.color
+            })
+        )
+        dispatch(setCleanBetNumbers())
     }
 
     return(      
@@ -49,10 +72,11 @@ const NewGame: React.FC = () => {
 
                 <GameActionsContainer>
                     <div>
-                        <ActionButton title="Complete Game" onClick={() => dispatch(setGenerateBetNumbers())}/>
-                        <ActionButton title="Clear Game" onClick={() => dispatch(setCleanBetNumbers())}/>
+                        <ActionButton title="Complete Game" onClick={handleCompleteGame}/>
+                        <ActionButton title="Clear Game" onClick={handleCleanGame}/>
                     </div>
-                    <ActionButton title="Add to cart" onClick={() => {}} color="#27C383"/>
+                    <ActionButton title="Add to cart" onClick={handleAddToCart} color="#27C383"/>
+                        
                 </GameActionsContainer>
             </GameContainer>
             <CartContainer>

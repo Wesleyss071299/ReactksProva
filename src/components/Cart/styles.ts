@@ -19,6 +19,7 @@ export const TotalCart = styled.h2`
 	margin-left: 20px;
 	margin-bottom: 30px;
 	color: #707070;
+	font-style: italic;
 `;
 
 export const TotalCartNumber = styled.span`
@@ -58,4 +59,10 @@ export const SaveButton = styled.button`
 
 export const IconSaveButton = styled.svg`
     margin-left: 15px;
+`;
+
+export const EmptyCart = styled.h2`
+	display: flex;
+    align-items: center;
+	justify-content: center;
 `;

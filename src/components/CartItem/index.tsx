@@ -1,14 +1,17 @@
+import React from 'react';
 import { CartItemContainer, ButtonDelete, CartItemInfo, CartItemPrice } from './styles';
-
-const CartItem = () => {
+import { useAppDispatch } from '../../store/hooks'
+import { RemoveCart } from '../../store/cart-actions';
+const CartItem: React.FC<{id: number, betNumbers: number[], type: string, price: number, color: string}> = (props) => {
+    const dispatch = useAppDispatch();
     return(
         <CartItemContainer>
-            <ButtonDelete />
-            <CartItemInfo>
-                <p>01,02,04,05,06,07,09,15,17,20,21, 22,23,24,25</p>
-                <CartItemPrice>
-                    <p>Lotofácil</p>
-                    <p>R$ 4,50</p>
+            <ButtonDelete onClick={() => dispatch(RemoveCart(props.id))}/>
+            <CartItemInfo color={props.color}>
+                <p>{props.betNumbers.join(', ')}</p>
+                <CartItemPrice color={props.color}>
+                    <p>{props.type}</p>
+                    <strong>R$ {props.price.toFixed(2).split('.').join(',')}</strong>
                 </CartItemPrice>
             </CartItemInfo>
         </CartItemContainer>
