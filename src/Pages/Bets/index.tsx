@@ -17,6 +17,7 @@ const Bets = () => {
     useEffect(() => {
         dispatch(fetchGameData())        
     }, [dispatch])
+
     
     const games = useAppSelector((state)=> state.game.games)
     const CurrentGame = useAppSelector((state)=> state.game.currentGame)

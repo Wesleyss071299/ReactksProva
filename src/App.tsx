@@ -3,20 +3,21 @@ import NewGame from "./Pages/NewGame";
 import Register from "./Pages/Register";
 import ResetPassword from "./Pages/ResetPassword";
 import SignIn from "./Pages/SignIn";
+import { useAppSelector} from './store/hooks'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 
 function App() {
+  const isLogged = useAppSelector((state) => state.auth.isLoggedIn)
+  const token = useAppSelector((state) => state.auth.token)
   return (
     <Router>
       <Switch>
-        <Route  path="/" exact> 
-          <SignIn/> 
-        </Route>
         <Route path="/reset">
           <ResetPassword /> 
         </Route>
@@ -24,11 +25,18 @@ function App() {
           <Register/>
         </Route>
         <Route path="/new">
-          <NewGame/>
+          {isLogged && <NewGame/>}
+          {!isLogged && <Redirect to="/"/>} 
         </Route>
         <Route path="/bets">
-          <Bets/>
+          {isLogged && <Bets/>}
+          {!isLogged && <Redirect to="/"/>}       
         </Route>
+          {!isLogged &&(
+             <Route  path="/" exact> 
+                 <SignIn/> 
+            </Route>
+          )}
       </Switch>     
     </Router>
   );

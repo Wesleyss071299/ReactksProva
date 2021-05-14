@@ -31,6 +31,7 @@ const NewGame: React.FC = () => {
         dispatch(fetchGameData())        
     }, [dispatch])
 
+
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
         dispatch(setCurentGameData(game))

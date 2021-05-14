@@ -1,9 +1,12 @@
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
 import { IconSaveButton} from '../../components/Cart/styles'
+import { useAppDispatch } from '../../store/hooks';
+import { Login } from '../../store/auth-actions';
 import { Container, Input, FormContainer, LinkItem} from './styles'
 
 const SignIn = () => {
+    const dispatch = useAppDispatch();
     return(
         <Container>
             <Logo/>
@@ -17,7 +20,7 @@ const SignIn = () => {
                     <LinkItem to="/reset">
                         <p>I forget my password</p>
                     </LinkItem>
-                    <LinkItem to="/bets">
+                    <LinkItem to="/bets" onClick={() => dispatch(Login(new Date().getTime().toString()))}>
                         <h1>
                         Log In 
                             <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
