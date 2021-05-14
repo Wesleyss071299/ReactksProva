@@ -11,14 +11,14 @@ const Navbar: React.FC = () => {
                     <hr />
                 </LogoContainer>
                 <div>
-                    <li><NavLink  href="/">Home</NavLink></li>
+                    <li><NavLink  to="/bets">Home</NavLink></li>
                 </div>
             </div>
             <div>
                 <div>
-                    <li><NavLink href="/">Account</NavLink></li>
+                    <li><NavLink to="/">Account</NavLink></li>
                     <li>
-                        <NavLink href="/">Log out
+                        <NavLink to="/">Log out
                             <svg width="1em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>

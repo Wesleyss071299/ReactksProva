@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 
 export const Container = styled.div`
     display: flex;
@@ -34,4 +35,9 @@ export const Input = styled.input`
 	}
 `;
 
+
+export const LinkItem = styled(Link)`
+	text-decoration: none;
+	color: #707070;
+`
 

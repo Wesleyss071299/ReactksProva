@@ -13,6 +13,7 @@ import { Types } from '../../interfaces/game-interfaces'
 import NumberButton from '../../components/NumberButton';
 import ActionButton from '../../components/ActionsButton';
 import Cart from '../../components/Cart';
+import Navbar from '../../components/Navbar';
 
 
 
@@ -57,32 +58,35 @@ const NewGame: React.FC = () => {
     }
 
     return(      
-        <BetContainer>
-            <GameContainer>
-                <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame.type}</strong></h2>
-                <GameInfoContainer>
-                    <h3>Choose Game</h3>
-                    <ButtonsGameType onSetGameType={setGameType} />
-                </GameInfoContainer>
+        <>
+            <Navbar/>     
+            <BetContainer>
+                <GameContainer>
+                    <h2 className="title"> NEW BET <strong>FOR</strong> <strong>{currentGame.type}</strong></h2>
+                    <GameInfoContainer>
+                        <h3>Choose Game</h3>
+                        <ButtonsGameType onSetGameType={setGameType} />
+                    </GameInfoContainer>
 
-                <GameInfoContainer>
-                    <GameDescription description={currentGame.description}/>               
-                </GameInfoContainer>
-                <NumberButton range={currentGame.range}/>
+                    <GameInfoContainer>
+                        <GameDescription description={currentGame.description}/>               
+                    </GameInfoContainer>
+                    <NumberButton range={currentGame.range}/>
 
-                <GameActionsContainer>
-                    <div>
-                        <ActionButton title="Complete Game" onClick={handleCompleteGame}/>
-                        <ActionButton title="Clear Game" onClick={handleCleanGame}/>
-                    </div>
-                    <ActionButton title="Add to cart" onClick={handleAddToCart} color="#27C383"/>
-                        
-                </GameActionsContainer>
-            </GameContainer>
-            <CartContainer>
-                <Cart/>
-            </CartContainer>
-        </BetContainer>
+                    <GameActionsContainer>
+                        <div>
+                            <ActionButton title="Complete Game" onClick={handleCompleteGame}/>
+                            <ActionButton title="Clear Game" onClick={handleCleanGame}/>
+                        </div>
+                        <ActionButton title="Add to cart" onClick={handleAddToCart} color="#27C383"/>
+                            
+                    </GameActionsContainer>
+                </GameContainer>
+                <CartContainer>
+                    <Cart/>
+                </CartContainer>
+            </BetContainer>
+        </>
     )
 }
 

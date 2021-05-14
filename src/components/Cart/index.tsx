@@ -10,9 +10,11 @@ import {CartInfo,
         EmptyCart
 } from './styles';
 
-import { useAppSelector } from '../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../store/hooks'
+import { SaveGame } from '../../store/cart-actions'
 
 const Cart: React.FC = () => {
+    const dispatch = useAppDispatch();
     const cartItems = useAppSelector((state) => state.cart)
 
     if (cartItems.totalPrice === 0) {
@@ -36,7 +38,7 @@ const Cart: React.FC = () => {
                 <TotalCartNumber>TOTAL: R$ {cartItems.totalPrice.toFixed(2).split('.').join(',')}</TotalCartNumber>
             </TotalCart>
             <CartFooter>
-                <SaveButton>
+                <SaveButton onClick={() => dispatch(SaveGame())}>
                     Save
                     <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

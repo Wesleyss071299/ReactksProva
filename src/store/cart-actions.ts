@@ -13,3 +13,9 @@ export const RemoveCart = (id: number) => {
         dispatch(cartActions.removeItemToCart(id))
     }
 }
+
+export const SaveGame = () => {
+    return (dispatch: AppDispatch) => {
+        dispatch(cartActions.saveGame())
+    }
+}

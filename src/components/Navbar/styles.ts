@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { Link } from "react-router-dom";
 export const NavbarContainer = styled.nav`
     display: flex;
     justify-content: space-around;
@@ -39,7 +39,7 @@ export const LogoContainer = styled.div`
 `;
 
 
-export const NavLink = styled.a`
+export const NavLink = styled(Link)`
     display: inline-flex;
 	text-decoration: none;
     font-weight: bold;

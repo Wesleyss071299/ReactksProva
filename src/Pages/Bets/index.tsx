@@ -7,6 +7,10 @@ import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { Types } from '../../interfaces/game-interfaces'
 import {Container,HeaderContainer,ListContainer, NewBet} from './styles'
 import BetItem from '../../components/BetItem';
+
+
+
+
 const Bets = () => {
     const dispatch = useAppDispatch()
 
@@ -15,6 +19,8 @@ const Bets = () => {
     }, [dispatch])
     
     const games = useAppSelector((state)=> state.game.games)
+    const CurrentGame = useAppSelector((state)=> state.game.currentGame)
+    const bets = useAppSelector((state)=> state.cart.savedGames)
     
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
@@ -31,19 +37,16 @@ const Bets = () => {
                     <ButtonsGameType onSetGameType={setGameType} />
                 </HeaderContainer>
                 <ListContainer>
-                    <BetItem />
-                    <BetItem />
-                    <BetItem />
-                    <BetItem />
-                    <BetItem />
-                    <BetItem />
+                    {bets.filter((item) => item.type.includes(CurrentGame.type)).map((bet) => (
+                        <BetItem key={bet.id} type={bet.type} price={bet.price} betNumbers={bet.numbers} color={bet.color}  />
+                    ))}
                 </ListContainer>
             </div>
-            <NewBet>
-                <h1>New Bet</h1>
-                <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </IconSaveButton>
+            <NewBet to="/new">
+                    <h1>New Bet</h1>
+                    <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </IconSaveButton>
             </NewBet>
         </Container>
         </>

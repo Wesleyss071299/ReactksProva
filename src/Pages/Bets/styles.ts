@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 export const Container = styled.div`
     display: flex;
@@ -28,10 +29,11 @@ export const HeaderContainer = styled.div`
     }
 `;
 
-export const NewBet = styled.div`
+export const NewBet = styled(Link)`
     display: flex;
     flex-direction: row;
     align-items: center;
     color: #B5C401;
+    text-decoration: none;
 `;
 export const ListContainer = styled.div``;
