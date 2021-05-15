@@ -14,7 +14,6 @@ import {
 
 function App() {
   const isLogged = useAppSelector((state) => state.auth.isLoggedIn)
-  const token = useAppSelector((state) => state.auth.token)
   return (
     <Router>
       <Switch>
@@ -25,18 +24,15 @@ function App() {
           <Register/>
         </Route>
         <Route path="/new">
-          {isLogged && <NewGame/>}
-          {!isLogged && <Redirect to="/"/>} 
+          {isLogged || localStorage.getItem('token')? <NewGame/> : <Redirect to="/"/>}
         </Route>
         <Route path="/bets">
-          {isLogged && <Bets/>}
-          {!isLogged && <Redirect to="/"/>}       
+          {isLogged || localStorage.getItem('token')? <Bets/> : <Redirect to="/"/>}
         </Route>
-          {!isLogged &&(
              <Route  path="/" exact> 
-                 <SignIn/> 
+                 {!isLogged && <SignIn/>} 
             </Route>
-          )}
+
       </Switch>     
     </Router>
   );

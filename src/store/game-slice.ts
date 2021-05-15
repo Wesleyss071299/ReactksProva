@@ -12,10 +12,8 @@ const gameSlice = createSlice({
     initialState,
     reducers: {
         fetchGame(state, action) {
-            state.games = action.payload.games     
-        },
-        loadCurrentGame(state) {
-            state.currentGame = state.games[0]
+            state.games = action.payload.games  
+            state.currentGame = state.games[0]   
         },
         setGameType(state, action) {
             state.currentGame = action.payload.currentGame

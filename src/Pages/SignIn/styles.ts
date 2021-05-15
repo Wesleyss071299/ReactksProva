@@ -36,8 +36,21 @@ export const Input = styled.input`
 `;
 
 
+export const LoginButton = styled.button`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: #707070;
+	background-color: #fff;	
+`;
 export const LinkItem = styled(Link)`
 	text-decoration: none;
 	color: #707070;
+	p {
+		color: #9D9D9D
+	}
 `
 

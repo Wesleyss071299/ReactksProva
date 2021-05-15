@@ -17,10 +17,7 @@ export const fetchGameData = () => {
         try {
             const gameData = await fetchGame();
             dispatch(
-                gameActions.fetchGame({games: gameData})
-            )
-            dispatch(
-                gameActions.loadCurrentGame()
+               gameActions.fetchGame({games: gameData})
             )
         } catch (error) {
             

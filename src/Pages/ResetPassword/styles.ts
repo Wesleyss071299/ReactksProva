@@ -39,3 +39,14 @@ export const LinkItem = styled(Link)`
 	text-decoration: none;
 	color: #707070;
 `
+
+export const ResetButton = styled.button`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	color: #707070;
+	background-color: #fff;	
+`;

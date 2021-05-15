@@ -1,29 +1,82 @@
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
-import { Container, FormContainer, Input, LinkItem} from './styles';
+import { Container, FormContainer, Input, LinkItem, RegisterButton} from './styles';
 import { IconSaveButton} from '../../components/Cart/styles';
+import useInput from '../../hooks/use-input';
 
 
 const Register = () => { 
+    const {
+        value: enteredName,
+        isValid: enteredNameIsValid,
+        hasError: nameInputHasError,
+        valueChangeHandler: nameChangedHandler,
+        inputBlurHandler: nameBlurHandler,
+        reset: resetNameInput,
+      } = useInput((value) => value.trim() !== '');
+
+    const {
+        value: enteredPassword,
+        isValid: enteredPasswordIsValid,
+        hasError: passwordInputHasError,
+        valueChangeHandler: passwordChangedHandler,
+        inputBlurHandler: passwordBlurHandler,
+        reset: resetPasswordInput,
+      } = useInput((value) => value.trim() !== '');
+      
+    const {
+        value: enteredEmail,
+        isValid: enteredEmailIsValid,
+        hasError: emailInputHasError,
+        valueChangeHandler: emailChangeHandler,
+        inputBlurHandler: emailBlurHandler,
+        reset: resetEmailInput,
+      } = useInput((value) => value.includes('@'));
+
+      let formIsValid = false;
+
+      if (enteredNameIsValid && enteredEmailIsValid && enteredPasswordIsValid) {
+        formIsValid = true;
+      }
+     
+      const formSubmissionHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!enteredEmailIsValid || !enteredPasswordIsValid || !enteredNameIsValid) {
+          return;
+        }       
+
+        console.log("Name: "+ enteredName);
+        console.log("Email: "+ enteredEmail);
+        console.log("Password: "+ enteredPassword);
+        resetNameInput();
+        resetEmailInput();
+        resetPasswordInput();
+
+      };
+
     return(
     <Container>
         <Logo />
-        <FormContainer>
-            
+        <FormContainer> 
             <h2>Registration</h2>
-                <Card>       
-                    <Input value="Name"/>
+                <Card onSubmit={formSubmissionHandler}>       
+                    <Input value={enteredName} onChange={nameChangedHandler} onBlur={nameBlurHandler} placeholder="Name" type="text"/>
+                    {nameInputHasError && (<p style={{color: 'red'}}>Please enter a valid name.</p>)}
                     <hr/>
-                    <Input value="Email"/>
+                    <Input value={enteredEmail} onChange={emailChangeHandler} onBlur={emailBlurHandler} placeholder="Email" type="email"/>
+                    {emailInputHasError && (<p style={{color: 'red'}}>Please enter a valid email.</p>)}
                     <hr/>
-                    <Input value="Password"/>
+                    <Input value={enteredPassword} onChange={passwordChangedHandler} onBlur={passwordBlurHandler} placeholder="Password" type="password"/>
+                    {passwordInputHasError && (<p style={{color: 'red'}}>Please enter a valid password.</p>)}
                     <hr/>
-                    <h1>
-                        Register 
-                        <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </IconSaveButton>
-                    </h1>
+                    <RegisterButton disabled={!formIsValid}>
+                        <h1>
+                            Register 
+                            <IconSaveButton  width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </IconSaveButton>
+                        </h1>
+                    </RegisterButton>
                 </Card>
                 <LinkItem to="/">
                     <h2>

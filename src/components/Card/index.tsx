@@ -1,8 +1,8 @@
 import React from 'react';
 import { CardContainer } from './styles'
-const Card: React.FC = (props) => {
+const Card: React.FC<{onSubmit: (event: React.FormEvent<HTMLFormElement>) => void}> = (props) => {
     return(
-        <CardContainer>
+        <CardContainer onSubmit={props.onSubmit}>
             {props.children}
         </CardContainer>
     )
