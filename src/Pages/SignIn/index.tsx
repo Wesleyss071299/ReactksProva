@@ -45,7 +45,7 @@ const SignIn = () => {
         resetEmailInput();
         resetPasswordInput();
 
-        dispatch(Login(new Date().getTime().toString()))
+        dispatch(Login(new Date().getTime().toString(), {email: enteredEmail, password: enteredPassword}))
         history.push('/bets')
       };
 
