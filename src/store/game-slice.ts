@@ -23,7 +23,12 @@ const gameSlice = createSlice({
                 state.selectedBetNumbers = state.selectedBetNumbers.filter((item) => item !== action.payload.selectedNumber)
                 return
             }
+            if (state.selectedBetNumbers.length > state.currentGame['max-number'] - 1) {
+               return
+            }
+           
             state.selectedBetNumbers.push(action.payload.selectedNumber)
+            
         },
         cleanBetNumbers(state) {
             state.selectedBetNumbers = [] 

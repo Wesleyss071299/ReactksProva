@@ -1,8 +1,8 @@
-import Bets from "./Pages/Bets";
-import NewGame from "./Pages/NewGame";
-import Register from "./Pages/Register";
-import ResetPassword from "./Pages/ResetPassword";
-import SignIn from "./Pages/SignIn";
+import Bets from "./pages/Bets";
+import NewGame from "./pages/NewGame";
+import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
+import SignIn from "./pages/SignIn";
 import { useAppSelector} from './store/hooks'
 
 import {

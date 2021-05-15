@@ -1,4 +1,4 @@
-import React,  { MouseEvent, useEffect } from 'react';
+import React,  { MouseEvent, useEffect, useState } from 'react';
 import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer, CartContainer} from './styles'
 
 // Redux
@@ -25,7 +25,7 @@ const NewGame: React.FC = () => {
     const currentGame = useAppSelector((state)=> state.game.currentGame)
     const betNumbers = useAppSelector((state)=> state.game.selectedBetNumbers)
     
-
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         dispatch(fetchGameData())        
@@ -46,6 +46,10 @@ const NewGame: React.FC = () => {
     }
 
     const handleAddToCart = () => {
+        if (betNumbers.length < currentGame['max-number']) {
+            setError(true)
+            return
+        }
         dispatch(
             AddCart({
                 id: new Date().getMilliseconds(), 
@@ -56,6 +60,7 @@ const NewGame: React.FC = () => {
             })
         )
         dispatch(setCleanBetNumbers())
+        setError(false)
     }
 
     return(      
@@ -72,6 +77,7 @@ const NewGame: React.FC = () => {
                     <GameInfoContainer>
                         <GameDescription description={currentGame.description}/>               
                     </GameInfoContainer>
+                    {error && <p style={{color:'red'}}>Escolha no mínimo {currentGame['max-number']} números</p>}
                     <NumberButton range={currentGame.range}/>
 
                     <GameActionsContainer>
