@@ -14,6 +14,15 @@ export const NavbarContainer = styled.nav`
         display: flex;
         align-items: center;
     }
+
+    @media(max-width: 800px){
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        font-size: 16px;
+        padding: 10px;
+	}
+
 `
 
 export const LogoContainer = styled.div`
@@ -35,6 +44,12 @@ export const LogoContainer = styled.div`
         border-radius: 6px 6px 6px 6px;
         border-bottom: yellowgreen 7px solid;
     }
+
+    @media(max-width: 800px){
+        h1 {
+            font-size: 20px;
+        }
+	}
     
 `;
 

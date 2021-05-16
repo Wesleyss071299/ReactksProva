@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const ChooseNumber = styled.section`
     display: flex;
 	flex-wrap: wrap;
+    @media(max-width:800px) {
+        width: 100%;
+        justify-content: stretch;
+    
+    } 
+    
    
 `;
 
@@ -19,4 +25,9 @@ export const Number = styled.div<{background?:  string}>`
     font-weight: 700;
     cursor: pointer;
     color: white;
+    @media(max-width: 800px) {
+        width: 45px;
+        height: 45px;
+
+    }
 `

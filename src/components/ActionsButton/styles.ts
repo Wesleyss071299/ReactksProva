@@ -12,4 +12,7 @@ export const ActionButtonContainer = styled.button<{color?: string}>`
 	margin-right: 25px;
 	border: 1px solid #27c383;
 	color: ${props => props.color ? '#fff' : '#27c383' };
+	@media(max-width: 800px) {
+		padding: 10px 15px;
+    }
 `

@@ -11,6 +11,11 @@ export const Container = styled.div`
 		text-align: center;
 		font-style: italic;
     }
+	@media(max-width: 800px){
+		margin-top: 30px;
+		display: flex;
+		flex-direction: column;
+	}
 `;
 export const FormContainer = styled.div`
 	width: 352px;

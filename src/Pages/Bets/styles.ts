@@ -6,6 +6,13 @@ export const Container = styled.div`
 	justify-content: space-evenly;
 	align-items: baseline;
     margin-top: 79px;
+    @media(max-width: 800px) {
+        flex-direction: column;
+        align-items: center;
+        div {
+            flex-direction: column;
+        }
+  }
 
 
 `;
@@ -27,6 +34,14 @@ export const HeaderContainer = styled.div`
         font-style: italic;
         font-weight: lighter;
     }
+
+    @media(max-width: 800px) {
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
 `;
 
 export const NewBet = styled(Link)`
@@ -35,5 +50,9 @@ export const NewBet = styled(Link)`
     align-items: center;
     color: #B5C401;
     text-decoration: none;
+    @media(max-width: 800px) {
+     position:fixed;
+     top: 60px;
+    }
 `;
 export const ListContainer = styled.div``;

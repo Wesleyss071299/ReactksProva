@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
             </div>
             <div>
                 <div>
-                    <li><NavLink to="/">Account</NavLink></li>
+                    <li><NavLink to="/account">Account</NavLink></li>
                     <li>
                         <NavLink to="/" onClick={() => dispatch(Logout())}>Log out
                             <svg width="1em" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

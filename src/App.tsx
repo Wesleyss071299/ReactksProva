@@ -3,6 +3,7 @@ import NewGame from "./pages/NewGame";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import SignIn from "./pages/SignIn";
+import Account from "./pages/Account";
 import { useAppSelector} from './store/hooks'
 
 import {
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/bets">
           {isLogged || localStorage.getItem('token')? <Bets/> : <Redirect to="/"/>}
+        </Route>
+        <Route path="/account">
+          {isLogged || localStorage.getItem('token')? <Account/> : <Redirect to="/"/>}
         </Route>
              <Route  path="/" exact> 
                  {!isLogged && <SignIn/>} 
