@@ -11,18 +11,15 @@ import {
 } from "./styles";
 import { IconSaveButton } from "../../components/Cart/styles";
 import useInput from "../../hooks/use-input";
+import Error from '../../components/Error';
 
-interface IResponse {
-    data : Idata [],
-    status: number
 
-}
 interface Idata {
   message: string
 }
 
 const Register = () => {
-  const [errors, setErrors] = useState<string>()
+  const [errors, setErrors] = useState<string[]>([])
 
   const {
     value: enteredName,
@@ -61,6 +58,7 @@ const Register = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+    setErrors([])
     if (
       !enteredEmailIsValid ||
       !enteredPasswordIsValid ||
@@ -78,7 +76,7 @@ const Register = () => {
       .catch(function (error) {
         if (error.response) {
           console.log(error.response);
-          error.response.data.map((item : Idata) => setErrors(item.message))
+          error.response.data.map((item : Idata) => setErrors((errors) => [...errors, item.message]))
         }
       });
       console.log(errors)
@@ -168,7 +166,11 @@ const Register = () => {
             Back
           </h2>
         </LinkItem>
-      {errors &&  <p style={{ color: "red", justifyContent: 'center', alignItems: 'center', display: 'flex' }}>{errors}</p>}
+
+      {errors.map((error) => (
+          <Error title={error}/>
+      ))}
+      
       </FormContainer>
     </Container>
   );
