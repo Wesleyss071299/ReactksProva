@@ -28,7 +28,7 @@ function App() {
           {isLogged || localStorage.getItem('token')? <NewGame/> : <Redirect to="/"/>}
         </Route>
         <Route path="/bets">
-          {isLogged || localStorage.getItem('token')? <Bets/> : <Redirect to="/"/>}
+          {isLogged && <Bets/>}
         </Route>
         <Route path="/account">
           {isLogged || localStorage.getItem('token')? <Account/> : <Redirect to="/"/>}

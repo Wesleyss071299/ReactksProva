@@ -1,18 +1,14 @@
 import { AppDispatch } from './index'
 import {gameActions} from './game-slice'
 import { Types } from '../interfaces/game-interfaces'
-
+import api from '../services/api'
 export const fetchGameData = () => {
     return async(dispatch: AppDispatch) => {
         const fetchGame = async () => {
-            const response = await fetch('games.json',{
-                headers : { 
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                 }
-              })
-            const gamesResponse = await response.json();
-            return gamesResponse.types;
+            const token = localStorage.getItem('token')
+            const response = await api.get('games', { headers :  {"Authorization" : `Bearer ${token}`}})
+            const gamesResponse = response.data;
+            return gamesResponse;
         }
         try {
             const gameData = await fetchGame();

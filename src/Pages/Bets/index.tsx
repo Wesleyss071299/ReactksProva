@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import ButtonsGameType from "../../components/ButtonsGameType";
 import { IconSaveButton } from '../../components/Cart/styles'
 import Navbar from "../../components/Navbar";
@@ -8,20 +8,49 @@ import { Types } from '../../interfaces/game-interfaces'
 import {Container,HeaderContainer,ListContainer, NewBet} from './styles'
 import BetItem from '../../components/BetItem';
 
+import api from '../../services/api'
+
+interface IBet {
+    id: number;
+    numbers: number[];
+}
+
+interface ResponseData {
+    data: IBet[];
+}
+
 
 
 
 const Bets = () => {
+    const [bets, setBets] = useState<IBet[]>([])
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchGameData())        
     }, [dispatch])
 
+    useEffect(() => {
+        const loadBets = async () => {
+            const token = localStorage.getItem('token')
+            const response: ResponseData = await api.get('bets', { headers :  {"Authorization" : `Bearer ${token}`} })
+            const data: IBet[] = response.data.map((data) => ({
+                id: data.id,
+                numbers: data.numbers
+            }))
+            setBets([...bets, ...data])
+        }
+        loadBets()
+    }, [])
+
+    useEffect(() => {
+        console.log(bets)
+    }, [])
+
     
     const games = useAppSelector((state)=> state.game.games)
     const CurrentGame = useAppSelector((state)=> state.game.currentGame)
-    const bets = useAppSelector((state)=> state.cart.savedGames)
+    // const bets = useAppSelector((state)=> state.cart.savedGames)
     
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
@@ -38,8 +67,8 @@ const Bets = () => {
                     <ButtonsGameType onSetGameType={setGameType} />
                 </HeaderContainer>
                 <ListContainer>
-                    {bets.filter((item) => item.type.includes(CurrentGame.type)).map((bet) => (
-                        <BetItem key={bet.id} type={bet.type} price={bet.price} betNumbers={bet.numbers} color={bet.color}  />
+                    {bets.map((bet) => (
+                        <BetItem key={bet.id} type={CurrentGame.type} price={CurrentGame.price} betNumbers={bet.numbers} color={CurrentGame.color}  />
                     ))}
                 </ListContainer>
             </div>

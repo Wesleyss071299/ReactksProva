@@ -4,14 +4,14 @@ import { User } from '../interfaces/user-interfaces';
 const initialState = {
     users: [] as User[],
     token: '',
-    isLoggedIn: false,
+    isLoggedIn: false
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login(state, action) {
+        login(state, action) {  
             state.isLoggedIn = true;
             state.token = action.payload.token;
             state.users.push(action.payload.user)

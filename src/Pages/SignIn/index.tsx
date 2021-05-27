@@ -1,5 +1,6 @@
 import Card from '../../components/Card';
 import Logo from '../../components/Logo';
+
 import { IconSaveButton} from '../../components/Cart/styles';
 import { useAppDispatch } from '../../store/hooks';
 import { Login } from '../../store/auth-actions';
@@ -35,17 +36,14 @@ const SignIn = () => {
         formIsValid = true;
       }
 
-      const formSubmissionHandler = (event: React.FormEvent<HTMLFormElement>) => {
+      const formSubmissionHandler = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!enteredEmailIsValid || !enteredPasswordIsValid) {
           return;
         }       
-        console.log("email "+ enteredEmail);
-        console.log("password "+ enteredPassword);
         resetEmailInput();
         resetPasswordInput();
-
-        dispatch(Login(new Date().getTime().toString(), {email: enteredEmail, password: enteredPassword}))
+        dispatch(Login({email: enteredEmail, password: enteredPassword}))          
         history.push('/bets')
       };
 
