@@ -1,6 +1,5 @@
 import React,  { MouseEvent, useEffect, useState } from 'react';
 import {BetContainer, GameContainer, GameInfoContainer, GameActionsContainer, CartContainer} from './styles'
-
 // Redux
 import { fetchGameData, setCurentGameData, setCleanBetNumbers, setGenerateBetNumbers } from '../../store/game-actions';
 import { AddCart } from '../../store/cart-actions';
@@ -8,12 +7,13 @@ import { useAppSelector, useAppDispatch } from '../../store/hooks';
 // Components
 import GameDescription from '../../components/GameDescription';
 import ButtonsGameType from '../../components/ButtonsGameType';
-// Interfaces
-import { Types } from '../../interfaces/game-interfaces'
 import NumberButton from '../../components/NumberButton';
 import ActionButton from '../../components/ActionsButton';
 import Cart from '../../components/Cart';
 import Navbar from '../../components/Navbar';
+import Error from '../../components/Error';
+// Interfaces
+import { Types } from '../../interfaces/game-interfaces'
 
 
 
@@ -78,7 +78,7 @@ const NewGame: React.FC = () => {
                     <GameInfoContainer>
                         <GameDescription description={currentGame.description}/>               
                     </GameInfoContainer>
-                    {error && <p style={{color:'red'}}>Escolha no mínimo {currentGame['max-number']} números</p>}
+                    {error && <Error title={`Escolha no mínimo ${currentGame['max-number']} números`}/>}
                     <NumberButton range={currentGame.range}/>
 
                     <GameActionsContainer>

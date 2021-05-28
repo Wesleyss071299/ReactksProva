@@ -5,12 +5,12 @@ import ResetPassword from "./pages/ResetPassword";
 import SignIn from "./pages/SignIn";
 import Account from "./pages/Account";
 import { useAppSelector} from './store/hooks'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
           {isLogged && <Bets/>}
         </Route>
         <Route path="/account">
-          {isLogged || localStorage.getItem('token')? <Account/> : <Redirect to="/"/>}
+          {isLogged  && <Account/>}
         </Route>
              <Route  path="/" exact> 
                  {!isLogged && <SignIn/>} 

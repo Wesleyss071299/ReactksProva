@@ -1,31 +1,25 @@
 import { MouseEvent, useEffect, useState} from 'react';
+// Components
 import ButtonsGameType from "../../components/ButtonsGameType";
 import { IconSaveButton } from '../../components/Cart/styles'
+import BetItem from '../../components/BetItem';
 import Navbar from "../../components/Navbar";
+// Redux
 import { setCurentGameData, fetchGameData } from '../../store/game-actions';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
+// Interfaces
 import { Types } from '../../interfaces/game-interfaces'
-import {Container,HeaderContainer,ListContainer, NewBet} from './styles'
-import BetItem from '../../components/BetItem';
-
+import { ResponseBetData, IBet } from '../../interfaces/response-interface'
+// Services 
 import api from '../../services/api'
 
-interface IBet {
-    id: number;
-    numbers: number[];
-    game_id: number
-}
-
-interface ResponseData {
-    data: IBet[];
-}
-
+import {Container,HeaderContainer,ListContainer, NewBet} from './styles'
 
 
 
 const Bets = () => {
-    const [bets, setBets] = useState<IBet[]>([])
     const dispatch = useAppDispatch()
+    const [bets, setBets] = useState<IBet[]>([])
 
     useEffect(() => {
         dispatch(fetchGameData())        
@@ -35,7 +29,7 @@ const Bets = () => {
     useEffect(() => {
         const loadBets = async () => {
             const token = localStorage.getItem('token')
-            const response: ResponseData = await api.get('bets', { headers :  {"Authorization" : `Bearer ${token}`} })
+            const response: ResponseBetData = await api.get('bets', { headers :  {"Authorization" : `Bearer ${token}`} })
             const data: IBet[] = response.data.map((data) => ({
                 id: data.id,
                 numbers: data.numbers,
@@ -65,7 +59,13 @@ const Bets = () => {
                 </HeaderContainer>
                 <ListContainer>
                     {bets.filter( (item) => item.game_id === CurrentGame.id ).map((bet) => (
-                        <BetItem key={bet.id} type={CurrentGame.type} price={CurrentGame.price} betNumbers={bet.numbers} color={CurrentGame.color}  />
+                        <BetItem 
+                            key={bet.id} 
+                            type={CurrentGame.type} 
+                            price={CurrentGame.price} 
+                            betNumbers={bet.numbers} 
+                            color={CurrentGame.color}  
+                        />
                     ))}
                 </ListContainer>
             </div>

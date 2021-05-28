@@ -5,7 +5,6 @@ import { CartItem } from '../interfaces/cart-interfaces'
 const initialState = {
     items: [] as CartItem[],
     totalPrice: 0,
-    savedGames: [] as CartItem[]
 }
 
 const cartSlice = createSlice({
@@ -30,22 +29,11 @@ const cartSlice = createSlice({
             state.totalPrice = state.totalPrice - (item?.price as number)
             state.items = state.items.filter((item) => item.id !== id)
         },
-        saveGame(state) {
-            if (state.totalPrice > 5) {
-                state.items.map((item) => {
-                    return state.savedGames.push({
-                        id: item.id,
-                        game_id: item.game_id,
-                        type: item.type,
-                        numbers: item.numbers,
-                        color: item.color,
-                        price: item.price
-                    })
-                })
-                state.items = []
-                state.totalPrice = 0
-            }
+        cleanCart(state) {
+            state.items = []
+            state.totalPrice = 0
         }
+
     }
 })
 

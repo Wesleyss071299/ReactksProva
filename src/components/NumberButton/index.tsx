@@ -23,9 +23,6 @@ const NumberButton: React.FC<{range: number}> = (props) => {
         dispatch(setCleanBetNumbers())
     }, [currentGame, dispatch])
 
-    useEffect(() => {
-        console.log(betNumbers)
-    }, [betNumbers])
     return(
         <ChooseNumber>
             {numbers.map((item, index) => 
