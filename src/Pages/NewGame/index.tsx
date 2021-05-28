@@ -54,7 +54,8 @@ const NewGame: React.FC = () => {
             AddCart({
                 id: new Date().getMilliseconds(), 
                 numbers: betNumbers, 
-                price: currentGame.price, 
+                price: currentGame.price,
+                game_id: currentGame.id, 
                 type: currentGame.type, 
                 color: currentGame.color
             })

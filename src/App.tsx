@@ -25,7 +25,7 @@ function App() {
           <Register/>
         </Route>
         <Route path="/new">
-          {isLogged || localStorage.getItem('token')? <NewGame/> : <Redirect to="/"/>}
+          {isLogged && <NewGame/>}
         </Route>
         <Route path="/bets">
           {isLogged && <Bets/>}

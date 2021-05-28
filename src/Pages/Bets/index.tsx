@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState} from 'react';
 import ButtonsGameType from "../../components/ButtonsGameType";
 import { IconSaveButton } from '../../components/Cart/styles'
 import Navbar from "../../components/Navbar";
@@ -13,6 +13,7 @@ import api from '../../services/api'
 interface IBet {
     id: number;
     numbers: number[];
+    game_id: number
 }
 
 interface ResponseData {
@@ -30,27 +31,23 @@ const Bets = () => {
         dispatch(fetchGameData())        
     }, [dispatch])
 
+
     useEffect(() => {
         const loadBets = async () => {
             const token = localStorage.getItem('token')
             const response: ResponseData = await api.get('bets', { headers :  {"Authorization" : `Bearer ${token}`} })
             const data: IBet[] = response.data.map((data) => ({
                 id: data.id,
-                numbers: data.numbers
+                numbers: data.numbers,
+                game_id: data.game_id
             }))
-            setBets([...bets, ...data])
+            setBets(prev => [...prev, ...data])
         }
         loadBets()
     }, [])
-
-    useEffect(() => {
-        console.log(bets)
-    }, [])
-
     
     const games = useAppSelector((state)=> state.game.games)
     const CurrentGame = useAppSelector((state)=> state.game.currentGame)
-    // const bets = useAppSelector((state)=> state.cart.savedGames)
     
     const setGameType = (event: MouseEvent<HTMLElement>) => {
         const game = games.find((item) => item.type === event.currentTarget.getAttribute('value')) as Types
@@ -67,7 +64,7 @@ const Bets = () => {
                     <ButtonsGameType onSetGameType={setGameType} />
                 </HeaderContainer>
                 <ListContainer>
-                    {bets.map((bet) => (
+                    {bets.filter( (item) => item.game_id === CurrentGame.id ).map((bet) => (
                         <BetItem key={bet.id} type={CurrentGame.type} price={CurrentGame.price} betNumbers={bet.numbers} color={CurrentGame.color}  />
                     ))}
                 </ListContainer>

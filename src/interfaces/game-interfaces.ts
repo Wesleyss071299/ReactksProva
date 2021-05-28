@@ -1,5 +1,6 @@
 
 export interface Types  {
+    id: number;
     type: string;
     description: string;
     range: number;

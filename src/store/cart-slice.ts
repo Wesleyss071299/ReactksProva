@@ -16,6 +16,7 @@ const cartSlice = createSlice({
             const newItem: CartItem = action.payload;
             state.items.push({
                 id: newItem.id,
+                game_id: newItem.game_id,
                 type: newItem.type,
                 numbers: newItem.numbers,
                 price: newItem.price,
@@ -34,6 +35,7 @@ const cartSlice = createSlice({
                 state.items.map((item) => {
                     return state.savedGames.push({
                         id: item.id,
+                        game_id: item.game_id,
                         type: item.type,
                         numbers: item.numbers,
                         color: item.color,
