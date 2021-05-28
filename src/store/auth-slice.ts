@@ -4,7 +4,7 @@ import { User } from '../interfaces/user-interfaces';
 const initialState = {
     users: [] as User[],
     token: '',
-    isLoggedIn: false
+    isLoggedIn: localStorage.getItem('token') ? true : false
 }
 
 const authSlice = createSlice({
