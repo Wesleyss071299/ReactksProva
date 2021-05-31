@@ -1,6 +1,7 @@
 import Bets from "./pages/Bets";
 import NewGame from "./pages/NewGame";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import SignIn from "./pages/SignIn";
 import Account from "./pages/Account";
@@ -18,7 +19,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/reset">
+        <Route path="/forgot">
+          <ForgotPassword /> 
+        </Route>
+        <Route path="/reset/:token">
           <ResetPassword /> 
         </Route>
         <Route path="/register">

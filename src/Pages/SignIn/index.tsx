@@ -59,7 +59,7 @@ const SignIn = () => {
                     <Input value={enteredPassword} type="password" placeholder="Password" onChange={passwordChangedHandler} onBlur={passwordBlurHandler}/>
                     {passwordInputHasError && (<p style={{color: 'red'}}>Please enter a valid password.</p>)}
                     <hr/>
-                    <LinkItem to="/reset">
+                    <LinkItem to="/forgot">
                         <p>I forget my password</p>
                     </LinkItem>
                     <LoginButton type="submit" disabled={!formIsValid}>
