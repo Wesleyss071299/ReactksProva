@@ -2,14 +2,17 @@ import Card from '../../components/Card';
 import Logo from '../../components/Logo';
 
 import { IconSaveButton} from '../../components/Cart/styles';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Login } from '../../store/auth-actions';
+import { loginUser } from '../../store/auth-slice';
 import { Container, Input, FormContainer, LinkItem, LoginButton} from './styles';
 import useInput from '../../hooks/use-input';
 import {useHistory} from 'react-router-dom';
+import Error from '../../components/Error';
 
 const SignIn = () => {
     const history = useHistory();
+    const {errorMessage, isError} = useAppSelector((state) => state.auth)
     const dispatch = useAppDispatch();
 
     const {
@@ -43,8 +46,10 @@ const SignIn = () => {
         }       
         resetEmailInput();
         resetPasswordInput();
-        dispatch(Login({email: enteredEmail, password: enteredPassword}))          
-        history.push('/bets')
+       // dispatch(Login({email: enteredEmail, password: enteredPassword}))          
+        dispatch(loginUser({email: enteredEmail, password: enteredPassword}))          
+        console.log(isError.valueOf)
+        //history.push('/bets')
       };
 
     return(
@@ -80,6 +85,7 @@ const SignIn = () => {
                     </h2>
                 </LinkItem>
             </FormContainer>
+            {isError && <Error title={errorMessage}/>}
         </Container>                
     )
 }
