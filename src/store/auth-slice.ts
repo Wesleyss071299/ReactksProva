@@ -2,21 +2,22 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../interfaces/user-interfaces';
 import api from '../services/api';
 
+
 const initialState = {
     user: {} as User,
     token: '',
     isLoggedIn: localStorage.getItem('token') ? true : false,
     isError: false,
     errorMessage: '',
-
+    
 }
 
 export const loginUser = createAsyncThunk(
-    'users/loginUser',
+    'loginUser',
     async ({email, password}: User, thunkAPI) => {
         try {
             const response = await api.post('/sessions', {email, password})
-            const data = await response.data
+            const data = response.data
             console.log('data' + data)
             if (response.status === 200) {
                 localStorage.setItem('token', data.token);
@@ -44,6 +45,10 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
             localStorage.removeItem('token');
             state.token = ''
+        },
+        clearState(state) {
+            state.isError = false;
+            state.errorMessage = '';
         }
 
     },
