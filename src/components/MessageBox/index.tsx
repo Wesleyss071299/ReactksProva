@@ -1,11 +1,11 @@
 import React from 'react';
 import { ErrorContainer, ErrorText } from './styles';
-const Error: React.FC<{title: string}> = (props) => {
+const MessageBox: React.FC<{title: string, color: string}> = (props) => {
     return(
-        <ErrorContainer>
+        <ErrorContainer color={props.color}>
             <ErrorText>{props.title}</ErrorText>
         </ErrorContainer>
     )
 }
 
-export default Error;
+export default MessageBox;

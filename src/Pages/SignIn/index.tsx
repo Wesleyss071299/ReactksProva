@@ -8,7 +8,7 @@ import { loginUser, authActions } from '../../store/auth-slice';
 import { Container, Input, FormContainer, LinkItem, LoginButton} from './styles';
 import useInput from '../../hooks/use-input';
 import {useHistory} from 'react-router-dom';
-import Error from '../../components/Error';
+import MessageBox from '../../components/MessageBox';
 
 const SignIn = () => {
     const history = useHistory();
@@ -92,7 +92,7 @@ const SignIn = () => {
                         </IconSaveButton>
                     </h2>
                 </LinkItem>
-            {isError && <Error title={errorMessage}/>}
+            {isError && <MessageBox title={errorMessage} color="red"/>}
             </FormContainer>
         </Container>                
     )

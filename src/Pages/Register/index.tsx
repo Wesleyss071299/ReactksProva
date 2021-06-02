@@ -10,8 +10,9 @@ import {
   RegisterButton,
 } from "./styles";
 import { IconSaveButton } from "../../components/Cart/styles";
+import { useHistory } from 'react-router-dom'
 import useInput from "../../hooks/use-input";
-import Error from '../../components/Error';
+import MessageBox from '../../components/MessageBox';
 
 
 interface Idata {
@@ -19,6 +20,7 @@ interface Idata {
 }
 
 const Register = () => {
+  const history = useHistory()
   const [errors, setErrors] = useState<string[]>([])
 
   const {
@@ -79,7 +81,8 @@ const Register = () => {
           error.response.data.map((item : Idata) => setErrors((errors) => [...errors, item.message]))
         }
       });
-      console.log(errors)
+      
+    history.push('/')
     resetNameInput();
     resetEmailInput();
     resetPasswordInput();
@@ -168,7 +171,7 @@ const Register = () => {
         </LinkItem>
 
       {errors.map((error) => (
-          <Error title={error}/>
+          <MessageBox title={error} color="red"/>
       ))}
       
       </FormContainer>

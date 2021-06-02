@@ -11,7 +11,7 @@ import NumberButton from '../../components/NumberButton';
 import ActionButton from '../../components/ActionsButton';
 import Cart from '../../components/Cart';
 import Navbar from '../../components/Navbar';
-import Error from '../../components/Error';
+import MessageBox from '../../components/MessageBox';
 // Interfaces
 import { Types } from '../../interfaces/game-interfaces'
 
@@ -26,6 +26,7 @@ const NewGame: React.FC = () => {
     const betNumbers = useAppSelector((state)=> state.game.selectedBetNumbers)
     
     const [error, setError] = useState(false)
+
 
     useEffect(() => {
         dispatch(fetchGameData())        
@@ -78,7 +79,7 @@ const NewGame: React.FC = () => {
                     <GameInfoContainer>
                         <GameDescription description={currentGame.description}/>               
                     </GameInfoContainer>
-                    {error && <Error title={`Escolha no mínimo ${currentGame['max-number']} números`}/>}
+                    {error && <MessageBox title={`Escolha no mínimo ${currentGame['max-number']} números`} color="red"/>}
                     <NumberButton range={currentGame.range}/>
 
                     <GameActionsContainer>
