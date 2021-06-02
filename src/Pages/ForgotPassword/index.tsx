@@ -1,11 +1,22 @@
+import { useState } from 'react';
 import Card from '../../components/Card';
 import Logo from '../../components/Logo';
 import { IconSaveButton} from '../../components/Cart/styles'
 import { Container, Input, FormContainer, LinkItem, ResetButton } from './styles';
 import useInput from '../../hooks/use-input';
 import api from '../../services/api';
+import Error from '../../components/Error';
+
+
+interface IData {
+    error: {
+        message: string
+    }
+}
 
 const ForgotPassword = () => {
+    const [error, setError] = useState<string | null >(null)
+
     const {
         value: enteredEmail,
         isValid: enteredEmailIsValid,
@@ -23,10 +34,21 @@ const ForgotPassword = () => {
 
     const formSubmissionHandler = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setError('')
         if (!enteredEmailIsValid) {
           return;
         }       
-        await api.post('passwords', {email: enteredEmail, redirect_url: "http://localhost:3000/reset"})
+        // await api.post('/passwords', {email: enteredEmail, redirect_url: "http://localhost:3000/reset"}).then(response => {
+        //     setError('Email Enviado')
+        // }).catch((error) => {
+        //     setError(error.response.data.error.message)
+        // })
+        try {
+            const response = await api.post<IData>('/passwords', {email: enteredEmail, redirect_url: "http://localhost:3000/reset"})
+        } catch (error) {
+            setError(error.response.data.error.message)
+           
+        }
         resetEmailInput();
     };
 
@@ -56,6 +78,7 @@ const ForgotPassword = () => {
                         Back
                     </h2>
                 </LinkItem>
+               {error && <Error title={error} />} 
             </FormContainer>
         </Container>
     )

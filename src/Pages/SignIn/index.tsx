@@ -54,10 +54,10 @@ const SignIn = () => {
         const resultAction = await dispatch(loginUser({email: enteredEmail, password: enteredPassword}))
         if  (loginUser.fulfilled.match(resultAction)) {
             history.push('/bets')       
+            resetEmailInput();
+            resetPasswordInput();
         }
 
-        resetEmailInput();
-        resetPasswordInput();
     };
 
     return(
