@@ -1,36 +1,72 @@
 import Card from '../../components/Card';
 import Navbar from '../../components/Navbar'
-import { Container } from './styles';
-import { useAppSelector } from '../../store/hooks'
-import { useEffect } from 'react';
+import { Container, Input } from './styles';
+import { useEffect, useState } from 'react';
 import api from '../../services/api'
+import useInput from '../../hooks/use-input';
 
 
+interface IUser {
+    username: string;
+    email: string;
+}
 
 const Account = () => {
+    const [user, setUser] = useState<IUser>()
+
     useEffect(() => {
-        const loadBets = async () => {
+        const fetchUser = async () => {
             const token = localStorage.getItem('token')
-            const response = await api.get('teste', { headers :  {"Authorization" : `Bearer ${token}`} })
-            const data: IBet[] = response.data.map((data) => ({
-                id: data.id,
-                numbers: data.numbers,
-                game_id: data.game_id
-            }))
-            setBets(prev => [...prev, ...data])
+            const response = await api.get<IUser>('users', { headers :  {"Authorization" : `Bearer ${token}`} })
+            setUser({email: response.data.email, username: response.data.username})
         }
-        loadBets()
+        fetchUser()
     }, [])
+
+    const {
+        value: enteredName,
+        isValid: enteredNameIsValid,
+        hasError: nameInputHasError,
+        valueChangeHandler: nameChangedHandler,
+        inputBlurHandler: nameBlurHandler,
+        reset: resetNameInput,
+    } = useInput((value) => value.trim() !== "");
+
+    const {
+        value: enteredEmail,
+        isValid: enteredEmailIsValid,
+        hasError: emailInputHasError,
+        valueChangeHandler: emailChangeHandler,
+        inputBlurHandler: emailBlurHandler,
+        reset: resetEmailInput,
+      } = useInput((value) => value.includes("@"));
+
     return(
         <>
         <Navbar/>
         <Container>
             <Card onSubmit={() => {}}>
-                <h2>Name</h2>
-                <hr/>
-                <h2>{userEmail}</h2>
-                <hr/>
-                <h2>Password</h2>
+          <Input
+            value={enteredName}
+            onChange={nameChangedHandler}
+            onBlur={nameBlurHandler}
+            placeholder="Name"
+            type="text"
+          />
+          {nameInputHasError && (
+            <p style={{ color: "red" }}>Please enter a valid name.</p>
+          )}
+          <hr />
+          <Input
+            value={enteredEmail}
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
+            placeholder="Email"
+            type="email"
+          />
+          {emailInputHasError && (
+            <p style={{ color: "red" }}>Please enter a valid email.</p>
+          )}
             </Card>
         </Container>
         </>
