@@ -24,13 +24,16 @@ export const LogoContainer = styled.div`
         font-style: italic;
     }
     @media(max-width: 800px) {
+        width: 100%;
         h1 {
-            font-size: 20px;
+            font-size: 30px;
+            line-height: 35px;
+            letter-spacing: 5px;
         }
-
+        
         div {
             width: 80px;
-            height: 19px;
+            height: 26px;
             font-size: 15px;
         }
     }

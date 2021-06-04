@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const ButtonsGameContainer = styled.div`
     flex-direction: row;
+    @media(max-width: 800px){
+        width: 100% ;
+	}
 `;
 
 export const ButtonGame = styled.button<{color?: string, border?: string}>`

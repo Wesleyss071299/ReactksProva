@@ -12,6 +12,13 @@ export const CartInfo = styled.div`
         font-style: italic;
 
     }
+	
+    @media(max-width: 800px){
+		div {
+			width: 100%;
+		}
+	}
+
 `;
 
 export const TotalCart = styled.h2`

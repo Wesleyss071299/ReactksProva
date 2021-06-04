@@ -26,16 +26,21 @@ export const GameContainer = styled.section`
     max-width: 750px;
 	padding: 10px 10px;
 	margin-right: 100px;
+	@media(max-width: 800px) {
+		width: 100%;
+    }
 
 `;
 
 export const GameInfoContainer = styled.div`
 	max-width: 650px;
 	@media(max-width: 800px) {
+		width: 100%;
         div {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
+            display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			width: 100%;
+			grid-column: auto;
         }
     }
 `;
@@ -51,6 +56,7 @@ export const GameActionsContainer = styled.div`
 			align-items: center;
 			flex-wrap: nowrap;
 
+			width: 100%;
 		div {
 			display: flex;
 			flex-direction: row;
